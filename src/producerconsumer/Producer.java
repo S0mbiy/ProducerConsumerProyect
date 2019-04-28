@@ -12,13 +12,15 @@ public class Producer extends Thread {
     int wait;
     JTextPane gui;
     int bufferSize;
+    private boolean exit;
     
-    Producer(JTextPane gui,Buffer buffer, int id, int wait) {
+    Producer(JTextPane gui, Buffer buffer, int id, int wait) {
         this.buffer = buffer;
         this.id = id;
         this.wait = wait;
         this.gui = gui;
         this.bufferSize = buffer.getSize();
+        this.exit = false;
     }
     
     @Override
@@ -28,7 +30,7 @@ public class Producer extends Thread {
         int oper;
         Random r = new Random(System.currentTimeMillis()*(id+1));
         
-        while(true) {
+        while(!exit) {
             num1 = r.nextInt(10);
             num2 = r.nextInt(10);
             oper = r.nextInt(4);
@@ -42,4 +44,7 @@ public class Producer extends Thread {
         }
     }
     
+    public void setExit() {
+        this.exit = true;
+    }
 }

@@ -30,7 +30,7 @@ public class Buffer {
         
         if(this.buffer.isEmpty()) {
             try {
-                wait(1000);
+                wait(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -41,20 +41,21 @@ public class Buffer {
         String text = producerText.getText();
         producerText.setText(text.substring(text.indexOf('\n')+1));
         doneTasks.setText(""+(Integer.parseInt(doneTasks.getText())+1));
-        notifyAll();    
+        notify();    
         
         return product;
     }
     
     synchronized void produce(Integer[] product) {
-        if(this.buffer.size()>=size) {
+        if(this.buffer.size() >= size) {
             try {
-                wait(1000);
+                wait(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         this.buffer.add(product);
+        System.out.println(this.buffer.size());
         pb.setValue((int)((float)buffer.size()/size*100));
         tasks.setText(""+buffer.size());
         String text = producerText.getText();
@@ -72,7 +73,7 @@ public class Buffer {
                         producerText.setText(text+"P ID:"+product[3]+"| (/ "+product[1]+" "+product[2]+")\n");
                         break;
         }
-        notifyAll();
+        notify();
         
     }
     
