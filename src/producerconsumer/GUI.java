@@ -212,6 +212,8 @@ public class GUI extends javax.swing.JFrame {
 
     private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
         // TODO add your handling code here:
+        producerTP.setText("");
+        consumerTP.setText("");
         Buffer buffer = new Buffer(producerTP, bufferProgressBar, tasks, doneTasks, (Integer)bufferSpinner.getValue());
         for (int i = 0; i < (Integer)producerSpinner.getValue(); i++){
             Producer producer = new Producer(producerTP, buffer, i, (Integer)waitSpinner.getValue());
@@ -228,7 +230,7 @@ public class GUI extends javax.swing.JFrame {
     private void stopButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopButtonActionPerformed
         // TODO add your handling code here:
         for(int i = 0; i < producers.size(); i++) {
-            producers.get(i).setExit(); 
+            producers.get(i).setExit();
         }
         for(int i = 0; i < consumers.size(); i++) {
             consumers.get(i).setExit();

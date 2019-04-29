@@ -31,10 +31,11 @@ public class Buffer {
         if(this.buffer.isEmpty()) {
             try {
                 wait(10);
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }else{
         product = this.buffer.poll();
         pb.setValue((int)((float)buffer.size()/size*100));
         tasks.setText(""+buffer.size());
@@ -44,6 +45,8 @@ public class Buffer {
         notify();    
         
         return product;
+        }
+        return null;
     }
     
     synchronized void produce(Integer[] product) {
