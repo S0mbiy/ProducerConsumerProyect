@@ -56,8 +56,10 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        producerTP.setEditable(false);
         producerSP.setViewportView(producerTP);
 
+        consumerTP.setEditable(false);
         consumerSP.setViewportView(consumerTP);
 
         startButton.setText("Start");
@@ -214,14 +216,15 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         producerTP.setText("");
         consumerTP.setText("");
-        Buffer buffer = new Buffer(producerTP, bufferProgressBar, tasks, doneTasks, (Integer)bufferSpinner.getValue());
+        doneTasks.setText("0");
+        Buffer buffer = new Buffer(producerTP, consumerTP, bufferProgressBar, tasks, doneTasks, (Integer)bufferSpinner.getValue());
         for (int i = 0; i < (Integer)producerSpinner.getValue(); i++){
-            Producer producer = new Producer(producerTP, buffer, i, (Integer)waitSpinner.getValue());
+            Producer producer = new Producer(buffer, i, (Integer)waitSpinner.getValue());
             producers.add(producer);
             producer.start();
         }
         for(int i = 0; i < (Integer)consumerSpinner.getValue(); i++){
-            Consumer consumer = new Consumer(consumerTP, buffer, i, (Integer)waitSpinner.getValue());
+            Consumer consumer = new Consumer(buffer, i, (Integer)waitSpinner.getValue());
             consumers.add(consumer);
             consumer.start();
         }

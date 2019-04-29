@@ -4,21 +4,18 @@ package producerconsumer;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextPane;
 
 public class Producer extends Thread {
     Buffer buffer;
     int id;
     int wait;
-    JTextPane gui;
     int bufferSize;
     private boolean exit;
     
-    Producer(JTextPane gui, Buffer buffer, int id, int wait) {
+    Producer(Buffer buffer, int id, int wait) {
         this.buffer = buffer;
         this.id = id;
         this.wait = wait;
-        this.gui = gui;
         this.bufferSize = buffer.getSize();
         this.exit = false;
     }
