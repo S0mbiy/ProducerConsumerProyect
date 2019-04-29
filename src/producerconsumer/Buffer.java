@@ -54,8 +54,8 @@ public class Buffer {
                 Logger.getLogger(Buffer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        else {
         this.buffer.add(product);
-        System.out.println(this.buffer.size());
         pb.setValue((int)((float)buffer.size()/size*100));
         tasks.setText(""+buffer.size());
         String text = producerText.getText();
@@ -74,6 +74,7 @@ public class Buffer {
                         break;
         }
         notify();
+        }
         
     }
     
