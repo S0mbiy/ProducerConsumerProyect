@@ -55,6 +55,11 @@ public class GUI extends javax.swing.JFrame {
         doneTasks = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         producerTP.setEditable(false);
         producerSP.setViewportView(producerTP);
@@ -239,6 +244,15 @@ public class GUI extends javax.swing.JFrame {
             consumers.get(i).setExit();
         }
     }//GEN-LAST:event_stopButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        for(int i = 0; i < producers.size(); i++) {
+            producers.get(i).setExit();
+        }
+        for(int i = 0; i < consumers.size(); i++) {
+            consumers.get(i).setExit();
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
